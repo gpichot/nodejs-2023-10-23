@@ -1,5 +1,6 @@
 import express, { NextFunction, Request, Response } from "express";
 
+import betsRouter from "./routers/bets";
 import matchesRouter from "./routers/matches";
 
 const app = express();
@@ -7,19 +8,9 @@ const app = express();
 app.use(express.json());
 
 app.use("/matches", matchesRouter);
+app.use("/bets", betsRouter);
 
-app.get("/", (req, res) => {
-  console.log("Received request GET /");
-  res.cookie("hello", "bar");
-  res.status(200).send("OK");
-});
-
-app.get("/:username", (req, res) => {
-  const { username } = req.params;
-  throw new Error("Hello");
-
-  res.status(200).send(`Bonjour ${username}`);
-});
+app.get("/", (_, res) => res.status(200).send("OK"));
 
 function fibonacci(n: number): number {
   if (n < 0)
