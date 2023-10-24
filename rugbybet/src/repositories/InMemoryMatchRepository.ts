@@ -14,7 +14,9 @@ const DefaultMatch = {
   referee: "M. Dupont",
 };
 
-const MatchDatabase = {
+const MatchDatabase: {
+  matches: Match[];
+} = {
   matches: [DefaultMatch],
 };
 

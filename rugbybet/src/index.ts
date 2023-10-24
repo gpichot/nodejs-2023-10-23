@@ -1,7 +1,8 @@
+import "./mongo";
+
 import app from "./app";
+import { config } from "./config";
 
-const port = process.env.PORT || 3003;
-
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+app.listen(config.port, () => {
+  console.log(`Server is listening on port ${config.port}`);
 });

@@ -2,7 +2,9 @@ import express, { NextFunction, Request, Response } from "express";
 
 import betsRouter from "./routers/bets";
 import matchesRouter from "./routers/matches";
+import { config } from "./config";
 
+console.log(config.port);
 const app = express();
 
 app.use(express.json());

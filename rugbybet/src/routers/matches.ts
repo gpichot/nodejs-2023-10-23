@@ -1,5 +1,4 @@
 import express from "express";
-import { processRequestBody } from "zod-express-middleware";
 
 import { MatchRepository } from "../repositories";
 import { MatchCreatePayloadSchema } from "../types";
@@ -21,14 +20,21 @@ router.get("/:id", async (req, res) => {
   res.json(match);
 });
 
-router.post(
-  "/",
-  processRequestBody(MatchCreatePayloadSchema),
-  async (req, res) => {
-    const match = await MatchRepository.create(req.body);
+router.post("/", async (req, res) => {
+  const parsed = MatchCreatePayloadSchema.safeParse(req.body);
 
-    res.status(201).json(match);
+  if (!parsed.success) {
+    const humanizedErrors = parsed.error.issues.map((issue) => ({
+      field: issue.path.join("."),
+      code: issue.code,
+    }));
+    return res.status(400).json(humanizedErrors);
   }
-);
+
+  const body = req.body;
+  const match = await MatchRepository.create(body);
+
+  res.status(201).json(match);
+});
 
 export default router;
