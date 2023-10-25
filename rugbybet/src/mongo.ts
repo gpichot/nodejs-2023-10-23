@@ -1,9 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-import { config } from "./config";
 import { Bet, Match } from "./types";
-
-mongoose.connect(config.mongodbUri);
 
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
