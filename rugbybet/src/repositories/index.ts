@@ -1,6 +1,8 @@
 import InMemoryBetRepository from "./InMemoryBetRepository";
-import InMemoryMatchRepository from "./InMemoryMatchRepository";
+import MongoDBMatchRepository from "./MongoDBMatchRepository";
+// import InMemoryMatchRepository from "./InMemoryMatchRepository";
+import { IBetRepository, IMatchRepository } from "./types";
 
-export const MatchRepository = new InMemoryMatchRepository();
+export const MatchRepository: IMatchRepository = new MongoDBMatchRepository();
 
-export const BetRepository = new InMemoryBetRepository();
+export const BetRepository: IBetRepository = new InMemoryBetRepository();
