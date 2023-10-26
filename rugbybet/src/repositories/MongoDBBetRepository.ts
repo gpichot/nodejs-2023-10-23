@@ -5,7 +5,7 @@ import { IBetRepository } from "./types";
 function transform(bet: BetDocument) {
   return {
     id: bet._id,
-    matchId: bet.matchId,
+    matchId: bet.matchId.toHexString(),
     userId: bet.userId,
     amount: bet.amount,
     winner: bet.winner,
